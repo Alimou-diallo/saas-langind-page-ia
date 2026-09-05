@@ -154,14 +154,33 @@ const DATA = {
 };
 
 /* ============================================================
-   A. NAVBAR — Floating Pill
+   A. NAVBAR — Floating Pill (Smart Morphing & Autohide)
    ============================================================ */
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [visible, setVisible] = useState(true);
   const navRef = useRef(null);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 80);
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setScrolled(currentScrollY > 60);
+
+      if (currentScrollY > 120) {
+        if (currentScrollY > lastScrollY.current + 8) {
+          // Scrolling down -> Hide navbar smoothly
+          setVisible(false);
+        } else if (currentScrollY < lastScrollY.current - 8) {
+          // Scrolling up -> Show navbar
+          setVisible(true);
+        }
+      } else {
+        setVisible(true);
+      }
+      lastScrollY.current = currentScrollY;
+    };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -176,10 +195,13 @@ function Navbar() {
   return (
     <nav
       ref={navRef}
-      className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-out rounded-full px-6 py-3 flex items-center gap-8 ${scrolled
+      className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-out rounded-full px-6 py-3 flex items-center gap-8 ${
+        visible ? 'translate-y-0 opacity-100 pointer-events-auto' : '-translate-y-28 opacity-0 pointer-events-none'
+      } ${
+        scrolled
           ? 'glass glow-border shadow-2xl'
           : 'bg-transparent'
-        }`}
+      }`}
       style={{ maxWidth: '680px', width: 'calc(100% - 48px)' }}
     >
       {/* Initials */}
@@ -244,7 +266,7 @@ function Hero() {
     <section
       id="hero"
       ref={heroRef}
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
+      className="relative min-h-screen pt-32 md:pt-40 pb-20 flex flex-col items-center justify-center overflow-hidden"
       style={{
         background: 'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(123,97,255,0.18) 0%, #0A0A14 60%)',
       }}

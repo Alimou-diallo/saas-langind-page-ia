@@ -165,14 +165,14 @@ function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      setScrolled(currentScrollY > 60);
+      setScrolled(currentScrollY > 30);
 
-      if (currentScrollY > 120) {
-        if (currentScrollY > lastScrollY.current + 8) {
-          // Scrolling down -> Hide navbar smoothly
+      if (currentScrollY > 80) {
+        if (currentScrollY > lastScrollY.current + 3) {
+          // Scrolling down -> Hide navbar smoothly off-screen
           setVisible(false);
-        } else if (currentScrollY < lastScrollY.current - 8) {
-          // Scrolling up -> Show navbar
+        } else if (currentScrollY < lastScrollY.current - 3) {
+          // Scrolling up -> Reveal navbar
           setVisible(true);
         }
       } else {
@@ -195,8 +195,8 @@ function Navbar() {
   return (
     <nav
       ref={navRef}
-      className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-out rounded-full px-6 py-3 flex items-center gap-8 ${
-        visible ? 'translate-y-0 opacity-100 pointer-events-auto' : '-translate-y-28 opacity-0 pointer-events-none'
+      className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 ease-out rounded-full px-6 py-3 flex items-center gap-8 ${
+        visible ? 'translate-y-0 opacity-100 pointer-events-auto' : '-translate-y-32 opacity-0 pointer-events-none'
       } ${
         scrolled
           ? 'glass glow-border shadow-2xl'
@@ -266,7 +266,7 @@ function Hero() {
     <section
       id="hero"
       ref={heroRef}
-      className="relative min-h-screen pt-32 md:pt-40 pb-20 flex flex-col items-center justify-center overflow-hidden"
+      className="relative min-h-screen pt-36 md:pt-48 pb-20 flex flex-col items-center justify-start overflow-hidden"
       style={{
         background: 'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(123,97,255,0.18) 0%, #0A0A14 60%)',
       }}
@@ -291,7 +291,7 @@ function Hero() {
         }}
       />
 
-      <div className="relative z-10 text-center px-6 flex flex-col items-center">
+      <div className="relative z-10 text-center px-6 flex flex-col items-center mt-4 md:mt-8">
         {/* Avatar */}
         <div
           ref={photoRef}

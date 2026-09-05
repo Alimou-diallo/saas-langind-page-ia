@@ -3,7 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
   Mail, Phone, Download, ArrowRight, ExternalLink, MapPin, Calendar,
-  Palette, Video, Layers, Monitor, Sparkles, ChevronDown
+  Palette, Video, Layers, Monitor, Sparkles, ChevronDown, Menu, X
 } from 'lucide-react';
 
 const Linkedin = ({ size = 18, className = '', style = {} }) => (
@@ -154,11 +154,12 @@ const DATA = {
 };
 
 /* ============================================================
-   A. NAVBAR — Floating Pill (Smart Morphing & Autohide)
+   A. NAVBAR — Floating Pill (Fully Responsive & Mobile Drawer)
    ============================================================ */
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [visible, setVisible] = useState(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navRef = useRef(null);
   const lastScrollY = useRef(0);
 
@@ -167,12 +168,11 @@ function Navbar() {
       const currentScrollY = window.scrollY;
       setScrolled(currentScrollY > 30);
 
-      if (currentScrollY > 80) {
+      // Do not hide navbar if mobile menu drawer is currently open
+      if (!mobileMenuOpen && currentScrollY > 80) {
         if (currentScrollY > lastScrollY.current + 3) {
-          // Scrolling down -> Hide navbar smoothly off-screen
           setVisible(false);
         } else if (currentScrollY < lastScrollY.current - 3) {
-          // Scrolling up -> Reveal navbar
           setVisible(true);
         }
       } else {
@@ -183,56 +183,129 @@ function Navbar() {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [mobileMenuOpen]);
 
   const navLinks = [
-    { label: 'À propos', href: '#about' },
-    { label: 'Expérience', href: '#experience' },
-    { label: 'Compétences', href: '#skills' },
-    { label: 'Contact', href: '#contact' },
+    { num: '01', label: 'À propos', href: '#about' },
+    { num: '02', label: 'Expérience', href: '#experience' },
+    { num: '03', label: 'Compétences', href: '#skills' },
+    { num: '04', label: 'Contact', href: '#contact' },
   ];
 
+  const handleNavClick = () => {
+    setMobileMenuOpen(false);
+  };
+
   return (
-    <nav
-      ref={navRef}
-      className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 ease-out rounded-full px-6 py-3 flex items-center gap-8 ${
-        visible ? 'translate-y-0 opacity-100 pointer-events-auto' : '-translate-y-32 opacity-0 pointer-events-none'
-      } ${
-        scrolled
-          ? 'glass glow-border shadow-2xl'
-          : 'bg-transparent'
-      }`}
-      style={{ maxWidth: '680px', width: 'calc(100% - 48px)' }}
-    >
-      {/* Initials */}
-      <a href="#hero" className="font-mono-code text-accent text-sm font-medium flex-shrink-0 hover:text-accent-light transition-colors">
-        AD.
-      </a>
-
-      {/* Links */}
-      <div className="hidden md:flex items-center gap-6 flex-1 justify-center">
-        {navLinks.map((link) => (
-          <a
-            key={link.href}
-            href={link.href}
-            className="text-sm text-muted hover:text-ghost transition-all duration-200 hover:-translate-y-0.5 font-sans"
-          >
-            {link.label}
-          </a>
-        ))}
-      </div>
-
-      {/* CTA */}
-      <a
-        href="/cv-alimou-diallo.pdf"
-        download
-        className="btn-primary text-xs py-2 px-4 flex-shrink-0"
-        id="nav-download-cv"
+    <>
+      <nav
+        ref={navRef}
+        className={`fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 ease-out rounded-full px-5 py-3 flex items-center justify-between gap-4 ${
+          visible ? 'translate-y-0 opacity-100 pointer-events-auto' : '-translate-y-32 opacity-0 pointer-events-none'
+        } ${
+          scrolled || mobileMenuOpen
+            ? 'glass glow-border shadow-2xl'
+            : 'bg-transparent'
+        }`}
+        style={{ maxWidth: '680px', width: 'calc(100% - 32px)' }}
       >
-        <Download size={13} />
-        CV
-      </a>
-    </nav>
+        {/* Initials / Brand Logo */}
+        <a
+          href="#hero"
+          onClick={handleNavClick}
+          className="font-mono-code text-accent text-sm font-medium flex-shrink-0 hover:text-accent-light transition-colors flex items-center gap-1.5"
+        >
+          <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+          AD.
+        </a>
+
+        {/* Desktop Links (Visible on Tablet/Desktop md:flex, Hidden on Mobile) */}
+        <div className="hidden md:flex items-center gap-6 flex-1 justify-center">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="text-sm text-muted hover:text-ghost transition-all duration-200 hover:-translate-y-0.5 font-sans"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+
+        {/* Action Controls: Download CV CTA + Burger Menu Toggle */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          <a
+            href="/cv-alimou-diallo.pdf"
+            download
+            className="btn-primary text-xs py-2 px-3.5 flex-shrink-0"
+            id="nav-download-cv"
+          >
+            <Download size={13} />
+            <span className="hidden sm:inline">Télécharger</span> CV
+          </a>
+
+          {/* Mobile Burger Button (< 768px) */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle Mobile Menu"
+            className="md:hidden w-9 h-9 rounded-full flex items-center justify-center text-ghost bg-accent/15 border border-accent/30 hover:border-accent transition-colors flex-shrink-0"
+          >
+            {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile Menu Fullscreen Glass Overlay (< 768px) */}
+      {mobileMenuOpen && (
+        <div
+          className="fixed inset-0 z-40 md:hidden flex flex-col justify-between p-6 pt-28 pb-12 transition-all duration-300"
+          style={{
+            background: 'rgba(10, 10, 20, 0.96)',
+            backdropFilter: 'blur(30px)',
+            WebkitBackdropFilter: 'blur(30px)',
+          }}
+        >
+          {/* Navigation Links */}
+          <div className="flex flex-col gap-5 my-auto max-w-sm mx-auto w-full px-4">
+            <p className="font-mono-code text-xs text-accent uppercase tracking-widest mb-2 opacity-70">
+              — Navigation
+            </p>
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={handleNavClick}
+                className="flex items-center gap-4 text-2xl font-display-sans text-ghost hover:text-accent transition-all duration-200 border-b border-white/5 pb-4 group"
+              >
+                <span className="font-mono-code text-xs text-accent/70 group-hover:text-accent">
+                  {link.num}
+                </span>
+                <span className="group-hover:translate-x-2 transition-transform">
+                  {link.label}
+                </span>
+                <ArrowRight size={16} className="ml-auto opacity-0 group-hover:opacity-100 text-accent transition-opacity" />
+              </a>
+            ))}
+          </div>
+
+          {/* Bottom Drawer Footer & CTA */}
+          <div className="max-w-sm mx-auto w-full px-4 text-center">
+            <a
+              href="/cv-alimou-diallo.pdf"
+              download
+              onClick={handleNavClick}
+              className="btn-primary w-full justify-center py-3.5 text-sm mb-6"
+            >
+              <Download size={16} />
+              Télécharger mon CV (PDF)
+            </a>
+            <p className="font-mono-code text-xs text-muted">
+              Alimou Diallo · Broktor.Design
+            </p>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 

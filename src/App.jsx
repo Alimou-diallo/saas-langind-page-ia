@@ -146,7 +146,7 @@ const DATA = {
     { name: 'Broktor.Design', desc: 'Marque personnelle — 7 logos clients, chartes graphiques, motion design et production vidéo.' },
   ],
   contact: {
-    email: 'alimou.diallo@broktor.design',
+    email: 'alimoudiallo2e.ad@gmail.com',
     phone: '+221 7X XXX XX XX',
     linkedin: 'https://linkedin.com/in/alimoudiallo',
     instagram: 'https://instagram.com/broktor.design',

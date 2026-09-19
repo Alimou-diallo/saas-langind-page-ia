@@ -1186,7 +1186,7 @@ function Footer() {
       <div className="section-container">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="font-sans text-muted text-sm">
-            <span className="text-ghost font-semibold">Alimou Diallo</span> — Fait avec ❤️ & Vibe Coding · {new Date().getFullYear()}
+            Fait par Alimou Diallo Coding {new Date().getFullYear()}
           </p>
           <div className="flex items-center gap-2 font-mono-code text-xs" style={{ color: '#22C55E' }}>
             <span

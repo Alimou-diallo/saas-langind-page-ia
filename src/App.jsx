@@ -3,7 +3,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
   Mail, Phone, Download, ArrowRight, ExternalLink, MapPin, Calendar,
-  Palette, Video, Layers, Monitor, Sparkles, ChevronDown, Menu, X
+  Palette, Video, Layers, Monitor, Sparkles, ChevronDown, Menu, X,
+  Play, Tag, Briefcase, Eye
 } from 'lucide-react';
 
 const Linkedin = ({ size = 18, className = '', style = {} }) => (
@@ -141,6 +142,110 @@ const DATA = {
       note: 'Président du Club Multimédia',
     },
   ],
+  portfolioProjects: [
+    {
+      id: 'rts-broadcast',
+      title: 'Habillage Graphique & Montage Broadcast',
+      client: 'RTS (Radiodiffusion Télévision Sénégalaise)',
+      category: 'video',
+      categoryLabel: 'Montage & Motion',
+      year: '2024',
+      badge: 'Broadcast TV',
+      featured: true,
+      desc: 'Création de synthés animés, transitions dynamiques et montage narratif pour des reportages et émissions d\'actualité nationale à forte audience.',
+      tags: ['Premiere Pro', 'After Effects', 'DaVinci Resolve', 'Habillage TV'],
+      accentColor: '#EF4444',
+      gradient: 'linear-gradient(135deg, rgba(239, 68, 68, 0.25) 0%, rgba(123, 97, 255, 0.15) 100%)',
+      stats: 'Diffusion Nationale',
+      icon: Video,
+      link: '#',
+    },
+    {
+      id: 'broktor-logos',
+      title: 'Pack de 7 Logotypes & Chartes Graphiques',
+      client: 'Broktor.Design · Clients Indépendants',
+      category: 'branding',
+      categoryLabel: 'Identité Visuelle',
+      year: '2023 — 2024',
+      badge: 'Branding',
+      featured: true,
+      desc: 'Création sur-mesure d\'identités de marque mémorables : logotypes vectoriels, palettes chromatiques harmonieuses, typographies et guidelines de marque.',
+      tags: ['Adobe Illustrator', 'Photoshop', 'Branding', 'Direction Artistique'],
+      accentColor: '#7B61FF',
+      gradient: 'linear-gradient(135deg, rgba(123, 97, 255, 0.3) 0%, rgba(59, 130, 246, 0.15) 100%)',
+      stats: '7 Marques Lancées',
+      icon: Palette,
+      link: '#',
+    },
+    {
+      id: 'smart-tali',
+      title: 'SmartTali — Gestion Intelligente du Trafic',
+      client: 'Projet de Fin d’Études · ESTM',
+      category: 'uiux',
+      categoryLabel: 'UI/UX & SaaS',
+      year: '2024',
+      badge: 'Produit Digital',
+      featured: true,
+      desc: 'Conception UI/UX de bout en bout pour une solution intelligente de régulation du trafic : personas B2B2C, design system complet et prototypes Figma interactifs.',
+      tags: ['Figma', 'UI/UX Design', 'Design System', 'Prototypage'],
+      accentColor: '#10B981',
+      gradient: 'linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(123, 97, 255, 0.15) 100%)',
+      stats: 'Projet Majeur',
+      icon: Layers,
+      link: '#',
+    },
+    {
+      id: 'adcom-campaigns',
+      title: 'Campagnes Visuelles Ramadan & Saint-Valentin',
+      client: 'ADCOM Digital',
+      category: 'branding',
+      categoryLabel: 'Direction Créative',
+      year: '2023 — 2024',
+      badge: 'Social Media & Print',
+      featured: false,
+      desc: 'Développement de concepts créatifs d\'impact pour les réseaux sociaux et affichages digitaux, générant une forte adhésion et engagement des communautés.',
+      tags: ['Direction Artistique', 'Photoshop', 'Illustrator', 'Social Media'],
+      accentColor: '#F59E0B',
+      gradient: 'linear-gradient(135deg, rgba(245, 158, 11, 0.25) 0%, rgba(239, 68, 68, 0.15) 100%)',
+      stats: '+45% d\'engagement',
+      icon: Sparkles,
+      link: '#',
+    },
+    {
+      id: 'motion-brand',
+      title: 'Motion Design & Animations Logo 2D/3D',
+      client: 'Freelance & Broktor.Design',
+      category: 'video',
+      categoryLabel: 'Motion Design',
+      year: '2024',
+      badge: 'Animation',
+      featured: false,
+      desc: 'Animations cinétiques pour intros vidéo, teasers promotionnels et révélations de logos dynamiques avec sound design percutant.',
+      tags: ['After Effects', 'Blender', 'Sound Design', 'Motion'],
+      accentColor: '#8B5CF6',
+      gradient: 'linear-gradient(135deg, rgba(139, 92, 246, 0.3) 0%, rgba(236, 72, 153, 0.15) 100%)',
+      stats: 'Full HD & 4K',
+      icon: Play,
+      link: '#',
+    },
+    {
+      id: '3d-mockups',
+      title: 'Visualisation Produit 3D & Mockups Réalistes',
+      client: 'Projets Clients & Explorations',
+      category: '3d',
+      categoryLabel: 'Rendu 3D',
+      year: '2024',
+      badge: 'Blender 3D',
+      featured: false,
+      desc: 'Mise en scène 3D de packaging de produits, modélisation texturée et éclairages réalistes sous Cycles pour des présentations clients à fort impact.',
+      tags: ['Blender 3D', 'Cycles Render', 'Lighting', 'Packaging'],
+      accentColor: '#38BDF8',
+      gradient: 'linear-gradient(135deg, rgba(56, 189, 248, 0.25) 0%, rgba(123, 97, 255, 0.15) 100%)',
+      stats: 'Rendu Ultra-HD',
+      icon: Monitor,
+      link: '#',
+    },
+  ],
   projects: [
     { name: 'SmartTali', desc: 'Identité de marque complète et interface pour un système de gestion intelligente du trafic — projet de fin d\'études.' },
     { name: 'Broktor.Design', desc: 'Marque personnelle — 7 logos clients, chartes graphiques, motion design et production vidéo.' },
@@ -189,7 +294,8 @@ function Navbar() {
     { num: '01', label: 'À propos', href: '#about' },
     { num: '02', label: 'Expérience', href: '#experience' },
     { num: '03', label: 'Compétences', href: '#skills' },
-    { num: '04', label: 'Contact', href: '#contact' },
+    { num: '04', label: 'Réalisations', href: '#portfolio' },
+    { num: '05', label: 'Contact', href: '#contact' },
   ];
 
   const handleNavClick = () => {
@@ -1058,7 +1164,339 @@ function Education() {
 }
 
 /* ============================================================
-   G. CONTACT — Le Pont
+   G. PORTFOLIO / RÉALISATIONS — Galerie Interactive
+   ============================================================ */
+function Portfolio() {
+  const sectionRef = useRef(null);
+  const [filter, setFilter] = useState('all');
+  const [selectedProject, setSelectedProject] = useState(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from('.portfolio-header', {
+        opacity: 0,
+        y: 40,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' },
+      });
+      gsap.from('.portfolio-card', {
+        opacity: 0,
+        y: 50,
+        stagger: 0.12,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: sectionRef.current, start: 'top 70%' },
+      });
+    }, sectionRef);
+    return () => ctx.revert();
+  }, []);
+
+  const categories = [
+    { key: 'all', label: 'Toutes les créations' },
+    { key: 'branding', label: 'Branding & Logos' },
+    { key: 'video', label: 'Vidéo & Motion TV' },
+    { key: 'uiux', label: 'UI/UX & SaaS' },
+    { key: '3d', label: '3D & Mockups' },
+  ];
+
+  const filteredProjects =
+    filter === 'all'
+      ? DATA.portfolioProjects
+      : DATA.portfolioProjects.filter((p) => p.category === filter);
+
+  return (
+    <section
+      id="portfolio"
+      ref={sectionRef}
+      className="section-padding relative"
+      style={{
+        background: 'linear-gradient(180deg, #0A0A14 0%, #0d091e 50%, #0A0A14 100%)',
+        borderTop: '1px solid rgba(123,97,255,0.08)',
+      }}
+    >
+      <div className="section-container">
+        {/* Header */}
+        <div className="portfolio-header mb-12">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+            <div>
+              <p className="font-mono-code text-accent text-xs tracking-widest uppercase mb-3 opacity-60">
+                04 — RÉALISATIONS & TRAVAUX
+              </p>
+              <h2 className="font-display-serif text-4xl md:text-6xl text-ghost mb-3">
+                L'Atelier Créatif
+              </h2>
+              <p className="font-sans text-muted text-base max-w-xl">
+                Une sélection de projets phares en habillage télévisuel, identité de marque, motion design et interfaces digitales.
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="font-mono-code text-xs px-3.5 py-1.5 rounded-full border border-accent/20 bg-accent/10 text-accent-light">
+                {DATA.portfolioProjects.length} Projets présentés
+              </span>
+            </div>
+          </div>
+
+          {/* Filtres par catégorie */}
+          <div className="flex flex-wrap gap-2.5 pt-2">
+            {categories.map((cat) => {
+              const active = filter === cat.key;
+              return (
+                <button
+                  key={cat.key}
+                  onClick={() => setFilter(cat.key)}
+                  className={`px-4 py-2 rounded-full text-xs font-mono-code transition-all duration-300 cursor-pointer ${
+                    active
+                      ? 'bg-accent text-white shadow-lg shadow-accent/30 font-medium'
+                      : 'bg-graphite/70 text-muted hover:text-ghost hover:bg-graphite-light border border-white/5'
+                  }`}
+                >
+                  {cat.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Grille des réalisations */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredProjects.map((project) => {
+            const IconComp = project.icon || Sparkles;
+            return (
+              <div
+                key={project.id}
+                onClick={() => setSelectedProject(project)}
+                className="portfolio-card group rounded-3xl p-6 transition-all duration-300 cursor-pointer flex flex-col justify-between relative overflow-hidden"
+                style={{
+                  background: 'rgba(24, 24, 27, 0.65)',
+                  border: '1px solid rgba(123, 97, 255, 0.14)',
+                  backdropFilter: 'blur(16px)',
+                }}
+              >
+                {/* Aura d'accent au hover */}
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  style={{
+                    background: project.gradient,
+                  }}
+                />
+
+                <div>
+                  {/* Top bar avec Badge & Stat */}
+                  <div className="flex items-center justify-between gap-3 mb-6 relative z-10">
+                    <span
+                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono-code font-medium border"
+                      style={{
+                        backgroundColor: `${project.accentColor}18`,
+                        borderColor: `${project.accentColor}40`,
+                        color: project.accentColor,
+                      }}
+                    >
+                      <IconComp size={12} />
+                      {project.badge}
+                    </span>
+                    <span className="font-mono-code text-[11px] text-muted">
+                      {project.year}
+                    </span>
+                  </div>
+
+                  {/* Thumbnail / Visual Placeholder stylisé */}
+                  <div
+                    className="w-full h-44 rounded-2xl mb-5 flex flex-col items-center justify-center relative overflow-hidden transition-transform duration-500 group-hover:scale-[1.02]"
+                    style={{
+                      background: 'rgba(10, 10, 20, 0.8)',
+                      border: '1px solid rgba(255, 255, 255, 0.06)',
+                    }}
+                  >
+                    <div
+                      className="absolute inset-0 opacity-30"
+                      style={{
+                        background: project.gradient,
+                        filter: 'blur(20px)',
+                      }}
+                    />
+                    <div className="relative z-10 p-4 rounded-2xl bg-white/5 border border-white/10 group-hover:scale-110 transition-transform duration-300">
+                      <IconComp size={28} style={{ color: project.accentColor }} />
+                    </div>
+                    <span className="relative z-10 font-mono-code text-[11px] text-muted mt-3 group-hover:text-ghost transition-colors">
+                      {project.stats}
+                    </span>
+                  </div>
+
+                  {/* Client & Titre */}
+                  <div className="relative z-10 mb-2">
+                    <p className="font-mono-code text-xs text-accent-light mb-1">
+                      {project.client}
+                    </p>
+                    <h3 className="font-sans font-bold text-lg text-ghost group-hover:text-accent transition-colors leading-snug">
+                      {project.title}
+                    </h3>
+                  </div>
+
+                  {/* Description */}
+                  <p className="font-sans text-sm text-muted leading-relaxed line-clamp-3 mb-6 relative z-10">
+                    {project.desc}
+                  </p>
+                </div>
+
+                {/* Footer de la carte : Tags & Bouton Voir */}
+                <div className="relative z-10 pt-4 border-t border-white/5">
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {project.tags.map((tag, tIdx) => (
+                      <span
+                        key={tIdx}
+                        className="text-[10px] font-mono-code px-2 py-0.5 rounded-md bg-white/5 text-muted border border-white/5"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="flex items-center justify-between text-xs font-mono-code text-accent pt-1 group-hover:translate-x-1 transition-transform">
+                    <span>Explorer le projet</span>
+                    <ArrowRight size={14} />
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Call to action sous le portfolio */}
+        <div className="mt-14 p-8 rounded-3xl text-center glass glow-border max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div className="text-left">
+            <h4 className="font-sans font-bold text-ghost text-lg mb-1">
+              Un projet créatif ou audiovisuel en vue ?
+            </h4>
+            <p className="font-sans text-muted text-sm">
+              Donnons vie à votre marque avec une identité visuelle marquante ou une vidéo broadcast.
+            </p>
+          </div>
+          <a href="#contact" className="btn-primary text-xs py-3 px-6 whitespace-nowrap flex-shrink-0">
+            Démarrer un projet
+            <ArrowRight size={14} />
+          </a>
+        </div>
+      </div>
+
+      {/* Modal / Pop-up de détail pour chaque réalisation */}
+      {selectedProject && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          style={{
+            background: 'rgba(5, 5, 12, 0.85)',
+            backdropFilter: 'blur(20px)',
+          }}
+          onClick={() => setSelectedProject(null)}
+        >
+          <div
+            className="glass glow-border rounded-4xl max-w-xl w-full p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => setSelectedProject(null)}
+              className="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-ghost transition-colors"
+              aria-label="Fermer"
+            >
+              <X size={16} />
+            </button>
+
+            {/* Modal header */}
+            <div className="flex items-center gap-2 mb-3">
+              <span
+                className="px-3 py-1 rounded-full text-xs font-mono-code font-medium border"
+                style={{
+                  backgroundColor: `${selectedProject.accentColor}18`,
+                  borderColor: `${selectedProject.accentColor}40`,
+                  color: selectedProject.accentColor,
+                }}
+              >
+                {selectedProject.badge}
+              </span>
+              <span className="font-mono-code text-xs text-muted">
+                {selectedProject.year}
+              </span>
+            </div>
+
+            <h3 className="font-sans font-bold text-2xl text-ghost mb-1">
+              {selectedProject.title}
+            </h3>
+            <p className="font-mono-code text-sm text-accent-light mb-6">
+              Client : {selectedProject.client}
+            </p>
+
+            {/* Visual preview box */}
+            <div
+              className="w-full h-48 rounded-2xl mb-6 flex flex-col items-center justify-center relative overflow-hidden"
+              style={{ background: 'rgba(10, 10, 20, 0.9)' }}
+            >
+              <div
+                className="absolute inset-0 opacity-40"
+                style={{ background: selectedProject.gradient, filter: 'blur(30px)' }}
+              />
+              <div className="relative z-10 p-5 rounded-3xl bg-white/10 border border-white/15">
+                {React.createElement(selectedProject.icon || Sparkles, {
+                  size: 40,
+                  style: { color: selectedProject.accentColor },
+                })}
+              </div>
+              <span className="relative z-10 font-mono-code text-xs text-ghost mt-3 font-medium">
+                {selectedProject.stats}
+              </span>
+            </div>
+
+            <div className="space-y-4 mb-6">
+              <div>
+                <h5 className="font-mono-code text-xs text-accent uppercase tracking-wider mb-1.5">
+                  Contexte & Réalisation
+                </h5>
+                <p className="font-sans text-ghost text-sm leading-relaxed">
+                  {selectedProject.desc}
+                </p>
+              </div>
+
+              <div>
+                <h5 className="font-mono-code text-xs text-accent uppercase tracking-wider mb-2">
+                  Outils & Compétences Mobilisés
+                </h5>
+                <div className="flex flex-wrap gap-2">
+                  {selectedProject.tags.map((tag, i) => (
+                    <span
+                      key={i}
+                      className="font-mono-code text-xs px-3 py-1 rounded-full bg-white/5 text-ghost border border-white/10"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-end gap-3 pt-4 border-t border-white/10">
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="btn-outline text-xs py-2.5 px-5"
+              >
+                Fermer
+              </button>
+              <a
+                href={`mailto:${DATA.contact.email}?subject=Question sur le projet : ${encodeURIComponent(selectedProject.title)}`}
+                className="btn-primary text-xs py-2.5 px-5"
+              >
+                <Mail size={13} />
+                Discuter de ce type de projet
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
+
+/* ============================================================
+   H. CONTACT — Le Pont
    ============================================================ */
 function Contact() {
   const sectionRef = useRef(null);
@@ -1214,6 +1652,7 @@ export default function App() {
         <Experience />
         <Skills />
         <Education />
+        <Portfolio />
         <Contact />
       </main>
       <Footer />

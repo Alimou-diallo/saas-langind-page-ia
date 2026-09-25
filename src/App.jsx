@@ -1178,19 +1178,22 @@ function Portfolio() {
         y: 40,
         duration: 0.8,
         ease: 'power3.out',
-        scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' },
-      });
-      gsap.from('.portfolio-card', {
-        opacity: 0,
-        y: 50,
-        stagger: 0.12,
-        duration: 0.8,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: sectionRef.current, start: 'top 70%' },
+        scrollTrigger: { trigger: sectionRef.current, start: 'top 85%' },
       });
     }, sectionRef);
     return () => ctx.revert();
   }, []);
+
+  // Animation fluide et réactive à chaque changement de filtre
+  useEffect(() => {
+    if (sectionRef.current) {
+      gsap.fromTo(
+        '.portfolio-card',
+        { opacity: 0, y: 25 },
+        { opacity: 1, y: 0, stagger: 0.08, duration: 0.5, ease: 'power2.out' }
+      );
+    }
+  }, [filter]);
 
   const categories = [
     { key: 'all', label: 'Toutes les créations' },
